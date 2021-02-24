@@ -2,10 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import NightsStayIcon from '@material-ui/icons/NightsStay';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 
-function Header() {
+function Header({onToggleDark, isDark}) {
+  function handleToggle(){
+    onToggleDark(!isDark)
+  }
+  console.log(isDark)
   return (
-    <Container>
+    <Container isDark={isDark}>
+      <ToggleContainer onClick={handleToggle}>
+        {isDark ? <WbSunnyIcon/> : <NightsStayIcon/>}
+      </ToggleContainer>
       <Main>
         <AccessTimeIcon/>
         <SearchContainer>
@@ -44,6 +53,13 @@ const Main = styled.div`
   display: flex;
   margin-left: 16px;
   margin-right: 16px;
+`
+
+const ToggleContainer = styled.div`
+  position: absolute;
+  left: 0;
+  padding-left: 16px;
+  cursor: pointer;
 `
 
 const SearchContainer = styled.div`

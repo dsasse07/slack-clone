@@ -1,24 +1,29 @@
 import './App.css';
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Chat from './components/Chat'
 import Login from './components/Login'
 import styled from 'styled-components'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
+
 function App() {
+
+  const [isDark, setisDark] = useState(false)
+
   return (
     <div className="App">
       <Router>
         <Container>
-          <Header/>
+          <Header onToggleDark={setisDark} isDark={isDark}/>
           <Main>
             <Sidebar />
               <Switch>
                 <Route path="/room">
-                  <Chat/>
+                  <Chat />
                 </Route>
                 <Route path="/">
-                  <Login/>
+                  <Login />
                 </Route>
               </Switch>
           </Main>

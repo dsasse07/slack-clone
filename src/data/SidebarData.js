@@ -32,3 +32,15 @@ export const sidebarItemsData = [
     text: "More"
   }
 ]
+
+export const channelsData = [
+  {
+    channelName: "Channel 1"
+  },
+  {
+    channelName: "Channel 2"
+  },
+  {
+    channelName: "Channel 3"
+  }
+]
