@@ -1,5 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import Chat from './components/Chat'
+import Login from './components/Login'
 
 function App() {
   return (
@@ -7,10 +9,10 @@ function App() {
       <Router>
         <Switch>
           <Route path="/room">
-            Chat Page
+            <Chat/>
           </Route>
           <Route path="/">
-            Login Page
+            <Login/>
           </Route>
         </Switch>
       </Router>
