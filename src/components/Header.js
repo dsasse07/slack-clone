@@ -31,13 +31,13 @@ function Header() {
 export default Header
 
 const Container = styled.header`
+  align-items: center;
   background: #350d36;
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
   color: white;
   display: flex;
-  align-items: center;
-  width: 100%;
   justify-content: center;
-  position: relative
+  position: relative;
 `
 
 const Main = styled.div`
