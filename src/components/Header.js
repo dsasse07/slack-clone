@@ -79,7 +79,7 @@ const UserContainer = styled.div`
   display: flex;
   align-items: center;
   padding-right: 16px;
-  position: absolute;
+  position: absolute; 
   right: 0
 `
 
