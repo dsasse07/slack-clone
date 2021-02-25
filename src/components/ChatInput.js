@@ -114,4 +114,4 @@ const InputStyleButtons = styled.div`
   svg:first-of-type{
     border-right: 1px solid rgba(141, 141, 142, 0.3);
   }
-`
+` 
