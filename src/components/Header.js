@@ -9,7 +9,7 @@ function Header({onToggleDark, isDark}) {
   function handleToggle(){
     onToggleDark(!isDark)
   }
-  console.log(isDark)
+  
   return (
     <Container isDark={isDark}>
       <ToggleContainer onClick={handleToggle}>

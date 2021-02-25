@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddIcon from '@material-ui/icons/Add';
-import {sidebarItemsData, channelsData} from '../data/SidebarData'
+import {sidebarItemsData} from '../data/SidebarData'
+import db from '../firebase';
 
-function Sidebar() {
+function Sidebar({ rooms }) {
 
   const sidebarItems = sidebarItemsData.map( ({icon, text}) => {
     return(
@@ -15,13 +16,18 @@ function Sidebar() {
     )
   })
 
-  const channelItems = channelsData.map( ({channelName}) => {
+  const channelItems = rooms.map( ({id, name}) => {
     return (
-      <Channel key={channelName}>
-        # {channelName}
+      <Channel key={id}>
+        # {name}
       </Channel>
     )
   })
+
+  const addChannel = () => {
+    const promptName = prompt('Enter channel name')
+    if (promptName) db.collection('rooms').add( {name: promptName} )
+  }
 
   return (
     <Container>
@@ -41,7 +47,7 @@ function Sidebar() {
           <div>
             Channels
           </div>
-          <AddIcon/>
+          <AddIcon onClick={addChannel}/>
         </NewChannelContainer>
         <ChannelsList>
           {channelItems}
@@ -113,6 +119,21 @@ const NewChannelContainer = styled.div`
   justify-content: space-between;
   padding-left: 19px;
   padding-right: 12px;
+  
+  svg{
+    border-radius: 50%;
+  }
+
+  svg:hover{
+    background: #350D36;
+    border: 1px solid #350D36;
+
+  }
+
+  svg:active{
+    background: #532753;
+    border: 1px solid rgba(119, 79, 119,0.7);
+  }
 `
 
 const ChannelsList = styled.section`
