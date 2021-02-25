@@ -26,6 +26,10 @@ const Container = styled.div`
   padding: 8px 20px;
   display: flex;
   align-items: center;
+
+  :hover{
+    background: #eaeaea;
+  }
 `
 
 const UserAvatar = styled.div`

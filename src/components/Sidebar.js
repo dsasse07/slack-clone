@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddIcon from '@material-ui/icons/Add';
+import CloseIcon from '@material-ui/icons/Close';
 import {sidebarItemsData} from '../data/SidebarData'
 import db from '../firebase';
 
@@ -19,7 +20,10 @@ function Sidebar({ rooms }) {
   const channelItems = rooms.map( ({id, name}) => {
     return (
       <Channel key={id}>
-        # {name}
+        <div>
+          # {name}
+        </div>
+        <CloseIcon onClick={() => deleteChannel(id)}/>
       </Channel>
     )
   })
@@ -27,6 +31,11 @@ function Sidebar({ rooms }) {
   const addChannel = () => {
     const promptName = prompt('Enter channel name')
     if (promptName) db.collection('rooms').add( {name: promptName} )
+  }
+
+  function deleteChannel (id) {
+    let permitted = window.confirm("Confirm?")
+    if (permitted) db.collection('rooms').doc(id).delete()
   }
 
   return (
@@ -109,7 +118,8 @@ const MainChannelItem = styled.div`
 
 const ChannelsContainer = styled.section`
   color: rgb(188,171,188);  
-  margin-top: 10px;
+  margin-top: 16px;
+
   `
 
 const NewChannelContainer = styled.div`
@@ -119,23 +129,23 @@ const NewChannelContainer = styled.div`
   justify-content: space-between;
   padding-left: 19px;
   padding-right: 12px;
-  
+  border-top: 1px solid #532753;
+  border-bottom: 1px solid #532753;
+
   svg{
     border-radius: 50%;
   }
 
-  svg:hover{
+  :hover{
     background: #350D36;
-
   }
-
-  svg:active{
+  :active{
     background: #532753;
   }
 `
 
 const ChannelsList = styled.section`
-
+  padding-top: 13px;
 `
 
 const Channel = styled.div`
@@ -148,4 +158,19 @@ const Channel = styled.div`
   :hover{
     background: #350D36
   }
+  div{
+    flex: 1;
+  }
+
+  svg{
+    padding-right: 12px;
+    height: 23px;
+    width: 23px;
+    color: rgba(188,171,188, 0.5);  
+  }
+
+  svg:hover{
+    color: rgb(188,171,188);  
+  }
+
 `
