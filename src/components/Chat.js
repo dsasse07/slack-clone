@@ -1,23 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
-import InfoIcon from '@material-ui/icons/Info';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import ChatInput from './ChatInput'
+import ChatMessage from './ChatMessage'
 
 function Chat() {
   return (
     <Container>
       <Header>
+        <Channel>
+          <ChannelName>
+            # Channel Name
+          </ChannelName>
+          <ChannelInfo>
+            Company wide announcements and work-based matters
+          </ChannelInfo>
+        </Channel>
         <ChannelDetails>
-          <h4># Channel Name</h4>
-          <p> Channel Description</p>
+          <div>
+            Details
+          </div>
+          <Info/>
         </ChannelDetails>
-        <DetailsContainer>
-          Details
-          <InfoIcon/>
-        </DetailsContainer>
       </Header>
-      <ChatWindow>
-        Chat Window
-      </ChatWindow>
+      <MessageContainer>
+        <ChatMessage />
+      </MessageContainer>
+      <ChatInput />
     </Container>
   )
 }
@@ -25,33 +34,43 @@ function Chat() {
 export default Chat
 
 const Container = styled.main`
-  background: blue;
   display: grid;
-  grid-template-rows: 64px auto;
+  grid-template-rows: 64px auto min-content;
+  
 `
 
 const Header = styled.header`
-  background: red;
   display: flex;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center;
+  border-bottom: 1px solid rgba(83,39,83, 0.13);
   justify-content: space-between;
+`
+
+const Channel = styled.div`
+
+`
+const ChannelName = styled.div`
+  font-weight: 700;
+`
+const ChannelInfo = styled.div`
+  font-weight: 400;
+  color: #606060;
+  font-weight: 13px;
+  margin-top: 8px;
+`
+const Info = styled(InfoOutlinedIcon)`
+  margin-left: 10px;
 `
 
 const ChannelDetails = styled.div`
-  background: purple;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 16px
-`
-
-const DetailsContainer = styled.div`
-  display: flex;
-  align-items: top;
+  align-items: center;
   padding-top: 10px;
   padding-right: 16px;
+  color: #606060;
 `
-const ChatWindow = styled.section`
-  background: green;
+const MessageContainer = styled.section`
+
 `

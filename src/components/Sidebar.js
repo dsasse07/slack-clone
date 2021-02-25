@@ -126,13 +126,11 @@ const NewChannelContainer = styled.div`
 
   svg:hover{
     background: #350D36;
-    border: 1px solid #350D36;
 
   }
 
   svg:active{
     background: #532753;
-    border: 1px solid rgba(119, 79, 119,0.7);
   }
 `
 
