@@ -158,6 +158,10 @@ const Channel = styled.div`
   :hover{
     background: #350D36
   }
+
+  :hover svg{
+    color: rgba(188,171,188, 0.5);  
+  }
   div{
     flex: 1;
   }
@@ -166,7 +170,7 @@ const Channel = styled.div`
     padding-right: 12px;
     height: 23px;
     width: 23px;
-    color: rgba(188,171,188, 0.5);  
+    color: #3f0e40;
   }
 
   svg:hover{

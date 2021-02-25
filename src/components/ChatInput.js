@@ -17,7 +17,7 @@ function ChatInput() {
     <Container>
         <InputContainer>
           <form>
-            <input type="text" placeholder="Message Here..."></input>
+            <textarea placeholder="Message Here..."></textarea>
             <SendButton>
               <Send/>
             </SendButton>
@@ -54,17 +54,18 @@ const InputContainer = styled.div`
   
   form{
     display: flex;
-    height: 42px;
+    height: 60px;
     align-items: center;
     padding-left: 10px;
 
-    input{
+    textarea{
       flex: 1; //take up as much space as possible
       border: none;
       font-size: 13px;
+      resize: none;
     }
 
-    input:focus{
+    textarea:focus{
       outline:none;
     }
   }
@@ -104,6 +105,10 @@ const InputStyleButtons = styled.div`
     height: 18px;
     width: 28px;
     border-right: 1px solid rgba(141, 141, 142, 0.3);
+    font-size: 18px;
+  }
+  div{
+    padding-bottom: 8px;
   }
 
   svg:hover, div:hover{
