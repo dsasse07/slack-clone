@@ -1,6 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import SendIcon from '@material-ui/icons/Send';
+import FlashOnOutlinedIcon from '@material-ui/icons/FlashOnOutlined';
+import FormatBoldIcon from '@material-ui/icons/FormatBold';
+import FormatItalicIcon from '@material-ui/icons/FormatItalic';
+import StrikethroughSIcon from '@material-ui/icons/StrikethroughS';
+import CodeIcon from '@material-ui/icons/Code';
+import LinkIcon from '@material-ui/icons/Link';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import SentimentSatisfiedOutlinedIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
+import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 
 function ChatInput() {
   return (
@@ -12,6 +22,19 @@ function ChatInput() {
               <Send/>
             </SendButton>
           </form>
+          <InputStyleButtons>
+            <FlashOnOutlinedIcon/>
+            <FormatBoldIcon/>
+            <FormatItalicIcon/>
+            <StrikethroughSIcon/>
+            <CodeIcon/>
+            <LinkIcon/>
+            <FormatListNumberedIcon/>
+            <MoreHorizIcon/>
+            <div>@</div>
+            <SentimentSatisfiedOutlinedIcon/>
+            <AttachFileOutlinedIcon/>
+          </InputStyleButtons>
         </InputContainer>
     </Container>
   )
@@ -70,3 +93,25 @@ const SendButton = styled.div`
 const Send = styled(SendIcon)`
   color: #d9d9d9;
 ` 
+
+const InputStyleButtons = styled.div`
+  border-top: 1px solid rgba(141, 141, 142, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  svg, div{
+    padding: 5px 12px;
+    height: 18px;
+    width: 28px;
+    border-right: 1px solid rgba(141, 141, 142, 0.3);
+  }
+
+  svg:hover, div:hover{
+    background: #eaeaea;
+    cursor: pointer;
+  }
+
+  svg:first-of-type{
+    border-right: 1px solid rgba(141, 141, 142, 0.3);
+  }
+`
