@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { auth, provider } from '../firebase'
+import logo from '../assets/images/logo.png'
 
 function Login({ onLogin }) {
 
@@ -23,7 +24,7 @@ function Login({ onLogin }) {
   return (
     <Container>
       <Content>
-        <SlackImg src="http://assets.stickpng.com/images/5cb480cd5f1b6d3fbadece79.png"/>
+        <SlackImg src={logo}/>
         <h1> Sign in to Slack </h1>
         <SignInButton onClick={signIn}>
             Sign In 
