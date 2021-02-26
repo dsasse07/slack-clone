@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import SendIcon from '@material-ui/icons/Send';
 import FlashOnOutlinedIcon from '@material-ui/icons/FlashOnOutlined';
@@ -12,13 +12,35 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import SentimentSatisfiedOutlinedIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 
-function ChatInput() {
+function ChatInput({ onSendMessage }) {
+
+  const [inputText, setInputText] = useState("")
+
+  function handleInputChange(event){
+    setInputText(event.target.value)
+  }
+
+  function handleSendMessage(event){
+    if ((event.type === "keydown" && event.key === "Enter" && !event.shiftKey) ||
+    event.type === "submit"){
+      event.preventDefault()
+      onSendMessage(inputText)
+      setInputText("")    
+    }
+  }
+  
+
   return (
     <Container>
         <InputContainer>
-          <form>
-            <textarea placeholder="Message Here..."></textarea>
-            <SendButton>
+          <form onSubmit={handleSendMessage}>
+            <textarea 
+              placeholder="Message Here..." 
+              onChange={handleInputChange}
+              value={inputText}
+              onKeyDown={handleSendMessage}
+            ></textarea>
+            <SendButton type="submit">
               <Send/>
             </SendButton>
           </form>
@@ -71,7 +93,7 @@ const InputContainer = styled.div`
   }
 `
 
-const SendButton = styled.div`
+const SendButton = styled.button`
   background: #007a5a;
   border-radius: 2px;
   width: 32px;
@@ -81,6 +103,7 @@ const SendButton = styled.div`
   justify-content: center;
   margin-right: 5px;
   cursor: pointer;
+  border: none;
 
   svg{
     width: 18px;
@@ -101,11 +124,11 @@ const InputStyleButtons = styled.div`
   align-items: center;
   justify-content: space-evenly;
   svg, div{
-    padding: 5px 12px;
+    padding: 4px 13px;
     height: 18px;
     width: 28px;
-    border-right: 1px solid rgba(141, 141, 142, 0.3);
     font-size: 18px;
+    border-radius: 4px;
   }
   div{
     padding-bottom: 8px;
@@ -114,9 +137,5 @@ const InputStyleButtons = styled.div`
   svg:hover, div:hover{
     background: #eaeaea;
     cursor: pointer;
-  }
-
-  svg:first-of-type{
-    border-right: 1px solid rgba(141, 141, 142, 0.3);
   }
 ` 

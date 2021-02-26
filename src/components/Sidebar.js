@@ -5,8 +5,17 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import {sidebarItemsData} from '../data/SidebarData'
 import db from '../firebase';
+import {useHistory} from 'react-router-dom'
 
-function Sidebar({ rooms }) {
+function Sidebar({ channels }) {
+
+  const history = useHistory()
+
+  function goToChannel(id) {
+    if (id){
+      history.push(`/channels/${id}`)
+    }
+  }
 
   const sidebarItems = sidebarItemsData.map( ({icon, text}) => {
     return(
@@ -17,25 +26,25 @@ function Sidebar({ rooms }) {
     )
   })
 
-  const channelItems = rooms.map( ({id, name}) => {
+  const channelItems = channels.map( ({id, name}) => {
     return (
-      <Channel key={id}>
+      <Channel key={id} onClick={ ()=>{ goToChannel(id) }}>
         <div>
           # {name}
         </div>
-        <CloseIcon onClick={() => deleteChannel(id)}/>
+        <CloseIcon onClick={ () => deleteChannel(id)}/>
       </Channel>
     )
   })
 
   const addChannel = () => {
     const promptName = prompt('Enter channel name')
-    if (promptName) db.collection('rooms').add( {name: promptName} )
+    if (promptName) db.collection('channels').add( {name: promptName} )
   }
 
   function deleteChannel (id) {
     let permitted = window.confirm("Confirm?")
-    if (permitted) db.collection('rooms').doc(id).delete()
+    if (permitted) db.collection('channels').doc(id).delete()
   }
 
   return (
