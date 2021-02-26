@@ -4,7 +4,7 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import PeopleIcon from '@material-ui/icons/People';
 import AppsIcon from '@material-ui/icons/Apps';
-import Apps from '@material-ui/icons/Apps';
+// import Apps from '@material-ui/icons/Apps';
 
 export const sidebarItemsData = [
   {

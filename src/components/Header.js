@@ -5,11 +5,11 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 
-function Header({onToggleDark, isDark}) {
+function Header({onToggleDark, isDark, user:{name, photo, id}, onLogout}) {
   function handleToggle(){
     onToggleDark(!isDark)
   }
-  console.log(isDark)
+  
   return (
     <Container isDark={isDark}>
       <ToggleContainer onClick={handleToggle}>
@@ -26,10 +26,13 @@ function Header({onToggleDark, isDark}) {
       </Main>
       <UserContainer>
         <Name>
-          Danny
+          {name}
         </Name>
-        <UserImage>
-          <img src="https://i.imgur.com/6VBx3io.png" alt="profile"></img>
+        <UserImage onClick={onLogout}>
+          <img 
+            src={photo ? photo : "https://i.imgur.com/6VBx3io.png"} 
+            alt={name}
+          />
         </UserImage>
       </UserContainer>
 
@@ -108,6 +111,7 @@ const UserImage = styled.div`
   height: 28px;
   border: 2px solid white;
   border-radius: 3px;
+  cursor: pointer;
 
   img {
     width: 100%;

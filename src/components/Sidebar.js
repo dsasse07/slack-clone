@@ -2,9 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddIcon from '@material-ui/icons/Add';
-import {sidebarItemsData, channelsData} from '../data/SidebarData'
+import CloseIcon from '@material-ui/icons/Close';
+import {sidebarItemsData} from '../data/SidebarData'
+import db from '../firebase';
+import {useHistory} from 'react-router-dom'
 
-function Sidebar() {
+function Sidebar({ channels }) {
+
+  const history = useHistory()
+
+  function goToChannel(id) {
+    if (id){
+      history.push(`/channels/${id}`)
+    }
+  }
 
   const sidebarItems = sidebarItemsData.map( ({icon, text}) => {
     return(
@@ -15,13 +26,26 @@ function Sidebar() {
     )
   })
 
-  const channelItems = channelsData.map( ({channelName}) => {
+  const channelItems = channels.map( ({id, name}) => {
     return (
-      <Channel key={channelName}>
-        # {channelName}
+      <Channel key={id} onClick={ ()=>{ goToChannel(id) }}>
+        <div>
+          # {name}
+        </div>
+        <CloseIcon onClick={ () => deleteChannel(id)}/>
       </Channel>
     )
   })
+
+  const addChannel = () => {
+    const promptName = prompt('Enter channel name')
+    if (promptName) db.collection('channels').add( {name: promptName} )
+  }
+
+  function deleteChannel (id) {
+    let permitted = window.confirm("Confirm?")
+    if (permitted) db.collection('channels').doc(id).delete()
+  }
 
   return (
     <Container>
@@ -41,7 +65,7 @@ function Sidebar() {
           <div>
             Channels
           </div>
-          <AddIcon/>
+          <AddIcon onClick={addChannel}/>
         </NewChannelContainer>
         <ChannelsList>
           {channelItems}
@@ -103,7 +127,8 @@ const MainChannelItem = styled.div`
 
 const ChannelsContainer = styled.section`
   color: rgb(188,171,188);  
-  margin-top: 10px;
+  margin-top: 16px;
+
   `
 
 const NewChannelContainer = styled.div`
@@ -113,10 +138,23 @@ const NewChannelContainer = styled.div`
   justify-content: space-between;
   padding-left: 19px;
   padding-right: 12px;
+  border-top: 1px solid #532753;
+  border-bottom: 1px solid #532753;
+
+  svg{
+    border-radius: 50%;
+  }
+
+  :hover{
+    background: #350D36;
+  }
+  :active{
+    background: #532753;
+  }
 `
 
 const ChannelsList = styled.section`
-
+  padding-top: 13px;
 `
 
 const Channel = styled.div`
@@ -129,4 +167,23 @@ const Channel = styled.div`
   :hover{
     background: #350D36
   }
+
+  :hover svg{
+    color: rgba(188,171,188, 0.5);  
+  }
+  div{
+    flex: 1;
+  }
+
+  svg{
+    padding-right: 12px;
+    height: 23px;
+    width: 23px;
+    color: #3f0e40;
+  }
+
+  svg:hover{
+    color: rgb(188,171,188);  
+  }
+
 `
